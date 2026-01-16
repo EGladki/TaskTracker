@@ -1,7 +1,7 @@
 package com.gladkiei.tasktracker.exceptions;
 
-public class AlreadyExistException extends RuntimeException {
-    public AlreadyExistException(String message) {
+public class EmailAlreadyExistException extends RuntimeException {
+    public EmailAlreadyExistException(String message) {
         super(message);
     }
 }
