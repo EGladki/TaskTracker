@@ -3,6 +3,7 @@ package com.gladkiei.tasktracker.controllers;
 import com.gladkiei.tasktracker.dtos.AuthRequestDto;
 import com.gladkiei.tasktracker.jwt.auth.JwtAuthResponse;
 import com.gladkiei.tasktracker.services.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,12 +17,12 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/sign-up")
-    public JwtAuthResponse registration(@RequestBody AuthRequestDto request) {
+    public JwtAuthResponse registration(@Valid @RequestBody AuthRequestDto request) {
         return authService.signUp(request);
         }
 
     @PostMapping("/sign-in")
-    public JwtAuthResponse login(@RequestBody AuthRequestDto request) {
+    public JwtAuthResponse login(@Valid @RequestBody AuthRequestDto request) {
         return authService.signIn(request);
     }
 }
