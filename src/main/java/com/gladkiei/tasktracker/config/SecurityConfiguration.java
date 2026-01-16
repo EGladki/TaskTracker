@@ -1,6 +1,7 @@
 package com.gladkiei.tasktracker.config;
 
 import com.gladkiei.tasktracker.jwt.auth.JwtAuthFilter;
+import com.gladkiei.tasktracker.jwt.auth.JwtAuthenticationEntryPoint;
 import com.gladkiei.tasktracker.security.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -18,9 +19,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-
-import java.util.List;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -31,12 +29,14 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 public class SecurityConfiguration {
     private final JwtAuthFilter jwtAuthFilter;
     private final UserDetailsServiceImpl userDetailsService;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.
                 csrf(AbstractHttpConfigurer::disable)
-                        .cors(Customizer.withDefaults());
+                .cors(Customizer.withDefaults());
+
 //                csrf(AbstractHttpConfigurer::disable)
 //                // Своего рода отключение CORS (разрешение запросов со всех доменов)
 //                .cors(cors -> cors.configurationSource(request -> {
@@ -55,6 +55,9 @@ public class SecurityConfiguration {
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider())
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

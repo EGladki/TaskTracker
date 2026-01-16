@@ -5,6 +5,7 @@ import com.gladkiei.tasktracker.dtos.AuthRequestDto;
 import com.gladkiei.tasktracker.models.User;
 import com.gladkiei.tasktracker.security.UserDetailsImpl;
 import com.gladkiei.tasktracker.security.UserDetailsServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,20 +13,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class AuthService {
     private final UserService userService;
     private final UserDetailsServiceImpl userDetailsService;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-
-    public AuthService(UserService userService, UserDetailsServiceImpl userDetailsService, JwtService jwtService, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
-        this.userService = userService;
-        this.userDetailsService = userDetailsService;
-        this.jwtService = jwtService;
-        this.passwordEncoder = passwordEncoder;
-        this.authenticationManager = authenticationManager;
-    }
 
     public JwtAuthResponse signUp(AuthRequestDto request) {
         User user = User.builder()

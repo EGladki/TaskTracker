@@ -1,5 +1,6 @@
 package com.gladkiei.tasktracker.controllers;
 
+import com.gladkiei.tasktracker.dtos.UserResponseDto;
 import com.gladkiei.tasktracker.models.User;
 import com.gladkiei.tasktracker.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +15,7 @@ public class TestController {
     private final UserService userService;
 
     @GetMapping("/user")
-    public User getCurrentUser() {
+    public UserResponseDto getCurrentUser() {
         return userService.getCurrentUser();
     }
 
