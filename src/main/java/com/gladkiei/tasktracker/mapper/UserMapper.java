@@ -1,7 +1,7 @@
 package com.gladkiei.tasktracker.mapper;
 
 import com.gladkiei.tasktracker.dtos.AuthRequestDto;
-import com.gladkiei.tasktracker.dtos.UserResponseDto;
+import com.gladkiei.tasktracker.dtos.user.UserResponseDto;
 import com.gladkiei.tasktracker.models.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

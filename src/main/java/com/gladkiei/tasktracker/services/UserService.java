@@ -1,6 +1,6 @@
 package com.gladkiei.tasktracker.services;
 
-import com.gladkiei.tasktracker.dtos.UserResponseDto;
+import com.gladkiei.tasktracker.dtos.user.UserResponseDto;
 import com.gladkiei.tasktracker.exceptions.EmailAlreadyExistException;
 import com.gladkiei.tasktracker.exceptions.NotFoundException;
 import com.gladkiei.tasktracker.mapper.UserMapper;

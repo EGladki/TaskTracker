@@ -3,9 +3,8 @@ package com.gladkiei.tasktracker.models;
 import com.gladkiei.tasktracker.enums.TaskStatus;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Type;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "tasks")

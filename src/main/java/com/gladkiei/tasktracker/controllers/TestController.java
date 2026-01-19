@@ -1,7 +1,6 @@
 package com.gladkiei.tasktracker.controllers;
 
-import com.gladkiei.tasktracker.dtos.UserResponseDto;
-import com.gladkiei.tasktracker.models.User;
+import com.gladkiei.tasktracker.dtos.user.UserResponseDto;
 import com.gladkiei.tasktracker.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
