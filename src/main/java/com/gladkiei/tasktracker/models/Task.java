@@ -24,7 +24,10 @@ public class Task {
     private String description;
 
     @Column(columnDefinition = "TIMESTAMP")
-    private Timestamp completionTime;
+    private Timestamp createdAt;
+
+    @Column(columnDefinition = "TIMESTAMP")
+    private Timestamp completedAt;
 
     @Enumerated(EnumType.STRING)
     private TaskStatus status;

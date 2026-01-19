@@ -18,12 +18,12 @@ public interface TaskMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", source = "user")
     @Mapping(target = "status", ignore = true)
-    @Mapping(target = "completionTime", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
     Task TaskRequestDtoToTask(TaskRequestDto taskRequestDto, User user);
 
     @AfterMapping
     default void setDefaults(@MappingTarget Task task) {
-        task.setCompletionTime(Timestamp.from(Instant.now()));
+        task.setCreatedAt(Timestamp.from(Instant.now()));
         task.setStatus(TaskStatus.TODO);
     }
 

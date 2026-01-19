@@ -9,4 +9,31 @@
     <include file="/db/changelog/001-create-users.xml"/>
     <include file="/db/changelog/002-create-tasks.xml"/>
 
+
+    <!--    <changeSet id="2026-01-16-add-completed-at-to-task" author="user">-->
+
+    <!--        <update tableName="tasks">-->
+    <!--            <column name="completion_time" value="created_at"/>-->
+    <!--        </update>-->
+
+    <!--    </changeSet>-->
+
+    <changeSet id="2026-01-16-add-completed-at-to-task" author="user">
+
+        <addColumn tableName="tasks">
+            <column name="completed_at" type="timestamp"/>
+        </addColumn>
+
+    </changeSet>
+
+    <changeSet id="2026-01-16-update-task-compition-time-to-created-at-" author="user">
+
+        <renameColumn
+                tableName="tasks"
+                newColumnName="created_at"
+                oldColumnName="completion_time"
+                columnDataType="timestamp"/>
+    </changeSet>
+
 </databaseChangeLog>
+
