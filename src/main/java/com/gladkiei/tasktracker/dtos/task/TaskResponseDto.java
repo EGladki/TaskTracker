@@ -9,7 +9,7 @@ public record TaskResponseDto(
         String title,
         String description,
         String createdAt,
-        Timestamp completionTime,
+        Timestamp completedAt,
         TaskStatus status,
         Long userId
 ) {

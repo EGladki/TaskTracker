@@ -19,6 +19,7 @@ public interface TaskMapper {
     @Mapping(target = "user", source = "user")
     @Mapping(target = "status", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "completedAt", ignore = true)
     Task TaskRequestDtoToTask(TaskRequestDto taskRequestDto, User user);
 
     @AfterMapping

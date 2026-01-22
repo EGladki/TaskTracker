@@ -3,6 +3,7 @@ package com.gladkiei.tasktracker.services;
 import com.gladkiei.tasktracker.dtos.task.TaskRequestDto;
 import com.gladkiei.tasktracker.dtos.task.TaskResponseDto;
 import com.gladkiei.tasktracker.dtos.task.TaskUpdateDto;
+import com.gladkiei.tasktracker.enums.TaskStatus;
 import com.gladkiei.tasktracker.exceptions.NotFoundException;
 import com.gladkiei.tasktracker.mapper.TaskMapper;
 import com.gladkiei.tasktracker.models.Task;
@@ -14,6 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,6 +93,9 @@ public class TaskService {
 
         if (taskUpdateDto.status() != null) {
             task.setStatus(taskUpdateDto.status());
+            if (task.getStatus() == TaskStatus.COMPLETED) {
+                task.setCompletedAt(Timestamp.from(Instant.now()));
+            }
         }
 
         return taskMapper.TaskToTaskResponseDto(task);
