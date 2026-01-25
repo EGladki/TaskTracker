@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
+
     private final AuthService authService;
     private final UserService userService;
 
     @PostMapping("/user")
     public JwtAuthResponse registration(@Valid @RequestBody AuthRequestDto request) {
         return authService.signUp(request);
-        }
+    }
 
     @PostMapping("/login")
     public JwtAuthResponse login(@Valid @RequestBody AuthRequestDto request) {

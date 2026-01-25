@@ -43,14 +43,12 @@ public class TaskService {
         }
     }
 
-    @Transactional
     public List<TaskResponseDto> get(Long userId) {
         List<Task> tasks = taskRepository.findByUserId(userId);
 
         return tasks.stream().map(taskMapper::TaskToTaskResponseDto).toList();
     }
 
-    @Transactional
     public TaskResponseDto get(Long taskId, Long userId) {
         Optional<Task> taskOptional = taskRepository.findByIdAndUserId(taskId, userId);
 
@@ -99,6 +97,5 @@ public class TaskService {
         }
 
         return taskMapper.TaskToTaskResponseDto(task);
-
     }
 }

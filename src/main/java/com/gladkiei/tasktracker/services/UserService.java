@@ -6,9 +6,11 @@ import com.gladkiei.tasktracker.exceptions.NotFoundException;
 import com.gladkiei.tasktracker.mapper.UserMapper;
 import com.gladkiei.tasktracker.models.User;
 import com.gladkiei.tasktracker.repositories.UserRepository;
+import com.gladkiei.tasktracker.services.event.publisher.EventPublisher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -18,14 +20,19 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final EventPublisher eventPublisher;
 
+    @Transactional
     public UserResponseDto save(User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new EmailAlreadyExistException("This email is already taken");
         }
 
         User saved = userRepository.save(user);
-        return userMapper.userToUserResponseDto(saved);
+
+        UserResponseDto userResponseDto = userMapper.userToUserResponseDto(saved);
+        eventPublisher.sendRegistrationEvent(userResponseDto);
+        return userResponseDto;
     }
 
     public User getByEmail(String email) {
@@ -37,6 +44,7 @@ public class UserService {
         }
     }
 
+    @Transactional
     public void deleteUserByEmail(String email) {
         Optional<User> user = userRepository.findByEmail(email);
         if (user.isPresent()) {
