@@ -5,7 +5,6 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.header.internals.RecordHeader;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,17 +20,6 @@ public class KafkaEventPublisher implements EventPublisher {
     public KafkaEventPublisher(KafkaTemplate<String, Object> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
-
-//    @Override
-//    public void sendRegistrationEvent(UserResponseDto userResponseDto) {
-//        kafkaTemplate.send(
-//                topic,
-//                MessageBuilder
-//                        .withPayload(userResponseDto)
-//                        .setHeader("event-type", eventType)
-//                        .build());
-//
-//    }
 
     @Override
     public void sendRegistrationEvent(UserResponseDto userResponseDto) {
