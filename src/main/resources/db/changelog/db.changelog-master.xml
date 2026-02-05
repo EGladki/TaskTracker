@@ -24,5 +24,17 @@
                 columnDataType="timestamp"/>
     </changeSet>
 
+    <changeSet id="2026-02-05-update-users-add-role-column" author="user">
+        <addColumn tableName="users">
+            <column name="role" type="VARCHAR(50)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="2026-02-05-update-users-add-all-user-ROLE_USER" author="user">
+        <update tableName="users">
+            <column name="role" value="ROLE_USER"/>
+        </update>
+    </changeSet>
+
 </databaseChangeLog>
 

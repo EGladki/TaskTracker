@@ -1,5 +1,6 @@
 package com.gladkiei.tasktracker.config;
 
+import com.gladkiei.tasktracker.enums.Role;
 import com.gladkiei.tasktracker.jwt.auth.JwtAuthFilter;
 import com.gladkiei.tasktracker.jwt.auth.RestAuthenticationEntryPoint;
 import com.gladkiei.tasktracker.security.UserDetailsServiceImpl;
@@ -38,8 +39,10 @@ public class SecurityConfiguration {
                 .cors(Customizer.withDefaults());
         http.authorizeHttpRequests(request -> request
                         .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/swagger-ui/**", "/swagger-resources/*", "/v3/api-docs/**").permitAll()
-                        .requestMatchers("/endpoint", "/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/tasks/**").hasAnyRole(Role.ADMIN.name(), Role.USER.name(), Role.INTERNAL_SERVICE.name())
+                        .requestMatchers("/swagger-ui/**", "/swagger-resources/*", "/v3/api-docs/**").hasRole("ADMIN")
+                        .requestMatchers("/internal/**").hasRole(Role.INTERNAL_SERVICE.name())
+                        .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider())

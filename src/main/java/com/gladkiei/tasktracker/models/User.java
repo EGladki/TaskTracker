@@ -1,5 +1,6 @@
 package com.gladkiei.tasktracker.models;
 
+import com.gladkiei.tasktracker.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
@@ -28,6 +29,10 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks;

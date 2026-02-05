@@ -1,5 +1,6 @@
 package com.gladkiei.tasktracker.services;
 
+import com.gladkiei.tasktracker.enums.Role;
 import com.gladkiei.tasktracker.jwt.auth.JwtAuthResponse;
 import com.gladkiei.tasktracker.dtos.AuthRequestDto;
 import com.gladkiei.tasktracker.models.User;
@@ -25,12 +26,11 @@ public class AuthService {
         User user = User.builder()
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-//                .role(Role.ROLE_USER)
+                .role(Role.USER)
                 .build();
 
         UserDetailsImpl userDetails = UserDetailsImpl.builder()
                 .user(user)
-//                .role(Role.ROLE_USER)
                 .build();
 
         userService.save(user);
