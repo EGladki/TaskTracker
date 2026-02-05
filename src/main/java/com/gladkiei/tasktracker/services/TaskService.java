@@ -10,6 +10,7 @@ import com.gladkiei.tasktracker.models.Task;
 import com.gladkiei.tasktracker.models.User;
 import com.gladkiei.tasktracker.repositories.TaskRepository;
 import com.gladkiei.tasktracker.repositories.UserRepository;
+import com.gladkiei.tasktracker.services.event.publisher.EventPublisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,7 @@ public class TaskService {
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
     private final TaskMapper taskMapper;
+    private final EventPublisher eventPublisher;
 
     @Transactional
     public TaskResponseDto add(TaskRequestDto taskRequestDto, Long userId) {
@@ -37,7 +39,9 @@ public class TaskService {
             Task task = taskMapper.TaskRequestDtoToTask(taskRequestDto, userOptional.get());
             Task saved = taskRepository.save(task);
 
-            return taskMapper.TaskToTaskResponseDto(saved);
+            TaskResponseDto taskResponseDto = taskMapper.TaskToTaskResponseDto(saved);
+            eventPublisher.sendNewTaskEvent(taskResponseDto);
+            return taskResponseDto;
         } else {
             throw new NotFoundException("User with such id doesn't exists");
         }
