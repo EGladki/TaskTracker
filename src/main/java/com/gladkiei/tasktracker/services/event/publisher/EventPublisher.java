@@ -1,10 +1,10 @@
 package com.gladkiei.tasktracker.services.event.publisher;
 
+import com.gladkiei.tasktracker.dtos.event.RegistrationEventDto;
 import com.gladkiei.tasktracker.dtos.task.TaskResponseDto;
-import com.gladkiei.tasktracker.dtos.user.UserResponseDto;
 
 public interface EventPublisher {
-    void sendRegistrationEvent(UserResponseDto userResponseDto);
+    void sendRegistrationEvent(RegistrationEventDto registrationEventDto);
 
     void sendNewTaskEvent(TaskResponseDto taskResponseDto);
 }

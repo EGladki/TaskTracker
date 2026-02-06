@@ -1,5 +1,6 @@
 package com.gladkiei.tasktracker.services;
 
+import com.gladkiei.tasktracker.dtos.event.RegistrationEventDto;
 import com.gladkiei.tasktracker.dtos.user.UserResponseDto;
 import com.gladkiei.tasktracker.exceptions.EmailAlreadyExistException;
 import com.gladkiei.tasktracker.exceptions.NotFoundException;
@@ -30,9 +31,9 @@ public class UserService {
 
         User saved = userRepository.save(user);
 
-        UserResponseDto userResponseDto = userMapper.userToUserResponseDto(saved);
-        eventPublisher.sendRegistrationEvent(userResponseDto);
-        return userResponseDto;
+        RegistrationEventDto registrationEventDto = userMapper.userToRegistrationEventDto(saved);
+        eventPublisher.sendRegistrationEvent(registrationEventDto);
+        return userMapper.userToUserResponseDto(saved);
     }
 
     public User getByEmail(String email) {

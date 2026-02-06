@@ -1,5 +1,6 @@
 package com.gladkiei.tasktracker.services.event.publisher;
 
+import com.gladkiei.tasktracker.dtos.event.RegistrationEventDto;
 import com.gladkiei.tasktracker.dtos.task.TaskResponseDto;
 import com.gladkiei.tasktracker.dtos.user.UserResponseDto;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -26,8 +27,8 @@ public class KafkaEventPublisher implements EventPublisher {
     }
 
     @Override
-    public void sendRegistrationEvent(UserResponseDto userResponseDto) {
-        ProducerRecord<String, Object> record = new ProducerRecord<>(topic, userResponseDto);
+    public void sendRegistrationEvent(RegistrationEventDto registrationEventDto) {
+        ProducerRecord<String, Object> record = new ProducerRecord<>(topic, registrationEventDto);
         record.headers().add(new RecordHeader("event-type", eventTypeWelcome.getBytes()));
         kafkaTemplate.send(record);
     }

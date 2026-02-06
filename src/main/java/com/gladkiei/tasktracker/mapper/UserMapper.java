@@ -1,6 +1,7 @@
 package com.gladkiei.tasktracker.mapper;
 
 import com.gladkiei.tasktracker.dtos.AuthRequestDto;
+import com.gladkiei.tasktracker.dtos.event.RegistrationEventDto;
 import com.gladkiei.tasktracker.dtos.user.UserResponseDto;
 import com.gladkiei.tasktracker.models.User;
 import org.mapstruct.Mapper;
@@ -13,4 +14,6 @@ public interface UserMapper {
     User AuthRequestDtoToUser(AuthRequestDto authRequestDto);
 
     UserResponseDto userToUserResponseDto(User user);
+
+    RegistrationEventDto userToRegistrationEventDto(User user);
 }
