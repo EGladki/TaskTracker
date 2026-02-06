@@ -1,8 +1,7 @@
 package com.gladkiei.tasktracker.config;
 
-import com.gladkiei.tasktracker.enums.Role;
-import com.gladkiei.tasktracker.jwt.auth.JwtAuthFilter;
-import com.gladkiei.tasktracker.jwt.auth.RestAuthenticationEntryPoint;
+import com.gladkiei.tasktracker.auth.jwt.JwtAuthFilter;
+import com.gladkiei.tasktracker.auth.jwt.RestAuthenticationEntryPoint;
 import com.gladkiei.tasktracker.security.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -41,7 +40,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/tasks/**").hasAnyRole("ADMIN", "USER", "INTERNAL_SERVICE")
                         .requestMatchers("/swagger-ui/**", "/swagger-resources/*", "/v3/api-docs/**").hasRole("ADMIN")
-                        .requestMatchers("/internal/**").hasRole("INTERNAL_SERVICE")
+                        .requestMatchers("/internal/**").hasAnyRole("ADMIN", "INTERNAL_SERVICE")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))

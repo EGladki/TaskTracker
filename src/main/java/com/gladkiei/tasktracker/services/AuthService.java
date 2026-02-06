@@ -1,7 +1,7 @@
 package com.gladkiei.tasktracker.services;
 
 import com.gladkiei.tasktracker.enums.Role;
-import com.gladkiei.tasktracker.jwt.auth.JwtAuthResponse;
+import com.gladkiei.tasktracker.auth.jwt.JwtAuthResponse;
 import com.gladkiei.tasktracker.dtos.AuthRequestDto;
 import com.gladkiei.tasktracker.models.User;
 import com.gladkiei.tasktracker.security.UserDetailsImpl;

@@ -1,4 +1,4 @@
-package com.gladkiei.tasktracker.jwt.auth;
+package com.gladkiei.tasktracker.auth.jwt;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;

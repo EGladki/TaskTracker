@@ -2,7 +2,7 @@ package com.gladkiei.tasktracker.controllers;
 
 import com.gladkiei.tasktracker.dtos.AuthRequestDto;
 import com.gladkiei.tasktracker.dtos.user.UserResponseDto;
-import com.gladkiei.tasktracker.jwt.auth.JwtAuthResponse;
+import com.gladkiei.tasktracker.auth.jwt.JwtAuthResponse;
 import com.gladkiei.tasktracker.services.AuthService;
 import com.gladkiei.tasktracker.services.UserService;
 import jakarta.validation.Valid;

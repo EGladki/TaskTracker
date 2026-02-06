@@ -1,4 +1,4 @@
-package com.gladkiei.tasktracker.jwt.auth;
+package com.gladkiei.tasktracker.auth.jwt;
 
 import com.gladkiei.tasktracker.dtos.ErrorResponse;
 import com.gladkiei.tasktracker.mapper.ErrorResponseWriter;

@@ -6,6 +6,7 @@ import com.gladkiei.tasktracker.exceptions.EmailAlreadyExistException;
 import com.gladkiei.tasktracker.exceptions.InternalServerException;
 import com.gladkiei.tasktracker.exceptions.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.query.SemanticException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -60,7 +61,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected ErrorResponse handleInternalServer(InternalServerException ex) {
         log.warn(ex.getMessage());
-        return new ErrorResponse(ex.getMessage());
+        return new ErrorResponse("Internal server error");
+    }
+
+    @ExceptionHandler(SemanticException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    protected ErrorResponse handleInternalServer(SemanticException ex) {
+        log.warn(ex.getMessage());
+        return new ErrorResponse("Internal server error");
     }
 
     @Override
