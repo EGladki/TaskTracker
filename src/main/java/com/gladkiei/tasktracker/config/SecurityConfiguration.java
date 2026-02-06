@@ -39,10 +39,10 @@ public class SecurityConfiguration {
                 .cors(Customizer.withDefaults());
         http.authorizeHttpRequests(request -> request
                         .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/tasks/**").hasAnyRole(Role.ADMIN.name(), Role.USER.name(), Role.INTERNAL_SERVICE.name())
+                        .requestMatchers("/tasks/**").hasAnyRole("ADMIN", "USER", "INTERNAL_SERVICE")
                         .requestMatchers("/swagger-ui/**", "/swagger-resources/*", "/v3/api-docs/**").hasRole("ADMIN")
-                        .requestMatchers("/internal/**").hasRole(Role.INTERNAL_SERVICE.name())
-                        .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
+                        .requestMatchers("/internal/**").hasRole("INTERNAL_SERVICE")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider())

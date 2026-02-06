@@ -1,5 +1,5 @@
 package com.gladkiei.tasktracker.enums;
 
 public enum Role {
-    ADMIN, USER, INTERNAL_SERVICE
+    ROLE_ADMIN, ROLE_USER, ROLE_INTERNAL_SERVICE
 }
